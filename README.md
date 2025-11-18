@@ -116,6 +116,8 @@
 ### 3.1 시스템 구조 (논리)
 
 ```text
+
+
 사용자 브라우저
    └─ React (Chat UI, 요약 카드, 정책 카드, 신청서 에디터)
         └─ REST API 호출
@@ -125,7 +127,13 @@
                   ├─ 네이버 CLOVA OCR (정책 이미지 → 텍스트, 선택)
                   └─ PostgreSQL (+ pgvector) – 정책/임베딩/사용자 질의 저장
 
-3.2 디렉터리 구조 (예시)
+
+```
+
+### 3.2 디렉터리 구조 (예시)
+
+```text
+
 .
 ├─ backend/
 │  ├─ src/
@@ -162,9 +170,9 @@
 ```
 
 
-# 4. 데이터 모델 (초안)
+## 4. 데이터 모델 (초안)
 
-## 4.1 주요 테이블
+### 4.1 주요 테이블
 
 ### user_queries – 사용자 상황 입력 로그
 
@@ -233,20 +241,20 @@
 
 ---
 
-# 5. 주요 API 설계 (MVP 기준)
+## 5. 주요 API 설계 (MVP 기준)
 
-## 5.1 상황 입력 → AI 요약 카드
+### 5.1 상황 입력 → AI 요약 카드
 
-### `POST /api/chat/analyze`
+#### `POST /api/chat/analyze`
 
-#### Request
+##### Request
 ```json
 {
   "message": "부산 23살, 학교 다니면서 알바하는데 통학 버스비랑 자취방 보증금이 너무 부담돼요."
 }
 ```
 
-#### 처리 흐름
+##### 처리 흐름
 
 1. OpenAI Chat API 호출
 2. 프롬프트에서 다음 스키마로 파싱 지시:
@@ -263,7 +271,7 @@ type ParsedProfile = {
 
 3. 결과를 `user_queries`에 저장
 
-#### Response
+##### Response
 ```json
 {
   "parsedProfile": {
